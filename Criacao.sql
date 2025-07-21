@@ -1,0 +1,63 @@
+Create database Academia
+
+use academia
+
+CREATE TABLE Aluno (
+ID_Aluno INT AUTO_INCREMENT NOT NULL,
+Nome VARCHAR(50) NOT NULL,
+Data_Nascimento DATE NOT NULL,
+Email VARCHAR(50) NOT NULL,
+Telefone VARCHAR(15) NOT NULL,
+PRIMARY KEY (ID_Aluno)
+
+SELECT * FROM Aluno
+
+CREATE TABLE Instrutor (
+Id_Instrutor INT AUTO_INCREMENT NOT NULL,
+Nome VARCHAR(50) NOT NULL,
+Formacao VARCHAR(50) NOT NULL,
+Email VARCHAR(50) NOT NULL,
+PRIMARY KEY (ID_Instrutor)
+)
+
+SELECT * FROM Instrutor
+
+CREATE TABLE Exercicio (
+ID_Exercicio INT AUTO_INCREMENT NOT NULL,
+Nome VARCHAR(50) NOT NULL,
+Grupo_Muscular VARCHAR(50) NOT NULL,
+Descricao VARCHAR(50) NOT NULL,
+PRIMARY KEY (ID_Exercicio)
+)
+
+SELECT * FROM Exercicio
+
+CREATE TABLE Treino (
+ID_Treino INT AUTO_INCREMENT NOT NULL,
+Data_Inicio DATE NOT NULL,
+Data_Fim DATE NOT NULL,
+ID_Aluno INT NOT NULL,
+ID_Instrutor INT NOT NULL,
+PRIMARY KEY (ID_Treino),
+Constraint FK_IDaluno
+FOREIGN KEY (ID_Aluno) REFERENCES Aluno (ID_Aluno)
+ON DELETE CASCADE ON UPDATE CASCADE,
+Constraint FK_IDinstrutor
+FOREIGN KEY (ID_Instrutor) REFERENCES Instrutor (ID_Instrutor)
+ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+SELECT * FROM Treino
+
+CREATE TABLE Treino_Exercicio (
+ID_Treino INT NOT NULL,
+ID_Exercicio INT NOT NULL,
+Series INT NOT NULL,
+Repeticoes INT NOT NULL,
+CONSTRAINT FK_IDtreino
+FOREIGN KEY (ID_Treino) REFERENCES Treino (ID_Treino),
+CONSTRAINT FK_IDexercicio
+FOREIGN KEY (ID_Exercicio) REFERENCES Exercicio (ID_Exercicio)
+)
+
+SELECT * FROM Treino_Exercicio
